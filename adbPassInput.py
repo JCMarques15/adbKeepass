@@ -1,15 +1,15 @@
-import os, getpass, sys
-from optparse import OptionParser
+import os, getpass, sys, argparse
 
 def main():
     # Creating instruction page
-    parser = OptionParser(usage="usage: python3 %prog", version="%prog 1.0")
-    (options, args) = parser.parse_args()
+    parser = argparse.ArgumentParser(usage="python3 %(prog)s [options]")
+    parser.add_argument('--version', action='version', version='%(prog)s 1.0')
+    args = parser.parse_args()
 
     # If script called with arguments exists with error message
     if len(sys.argv) != 1:
         parser.error("Script called with arguments")
-        print("{}\n{}".format(options, args))
+        print("{}".format(args))
 
     # Else it continues processing
     else:
