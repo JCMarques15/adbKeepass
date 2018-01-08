@@ -3,7 +3,7 @@ import os, getpass, sys, argparse
 def main():
     # Creating instruction page
     parser = argparse.ArgumentParser(usage="python3 %(prog)s [options]")
-    parser.add_argument('--version', action='version', version='%(prog)s 1.0')
+    parser.add_argument('--version', action='version', version='%(prog)s 1.20')
     args = parser.parse_args()
 
     # If script called with arguments exists with error message
