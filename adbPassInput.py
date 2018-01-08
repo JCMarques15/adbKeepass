@@ -37,13 +37,19 @@ def main():
 
 def escaper(escaping):
     # For each special character replace with an escaped sequence
-    for ch in ['\\', '`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', ',', '<', '.', '>', '|', '[', '{', ']', '}']:
+    for ch in ['\\', '`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', ',', '<', '.', '>', '|', '[', '{', ']', '}', ';', ':', "'", '"', '/', '?']:
         if ch == '\\':
             # '\' requires two '\' to escape for adb
             escaping = escaping.replace("\\", "\\\\\\");
+        elif ch == '`':
+            # '`' requires three '\' to escape for adb
+            escaping = escaping.replace("`", "\\\\\\`");
         elif ch == '$':
             # '$' requires three '\' to escape for adb
             escaping = escaping.replace("$", "\\\\\\$");
+        elif ch == '"':
+            # '"' requires escaping and clisong of in "'" for adb to process it as part of the string to send...
+            escaping = escaping.replace('"', '''"'\\"'"''');
         else:
             # Everything else gets escaped with a single '\'
             escaping = escaping.replace(ch, "\{}".format(ch));
