@@ -40,26 +40,26 @@ def escaper(escaping):
     for ch in ['\\', '`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', ',', '<', '.', '>', '|', '[', '{', ']', '}', ';', ':', "'", '"', '/', '?']:
         if ch == '\\':
             # '\' requires two '\' to escape for adb
-            escaping = escaping.replace("\\", "\\\\\\");
+            escaping = escaping.replace("\\", "\\\\\\")
         elif ch == '`':
             # '`' requires three '\' to escape for adb
-            escaping = escaping.replace("`", "\\\\\\`");
+            escaping = escaping.replace("`", "\\\\\\`")
         elif ch == '$':
             # '$' requires three '\' to escape for adb
-            escaping = escaping.replace("$", "\\\\\\$");
+            escaping = escaping.replace("$", "\\\\\\$")
         elif ch == '"':
             # '"' requires escaping and clisong of in "'" for adb to process it as part of the string to send...
-            escaping = escaping.replace('"', '''"'\\"'"''');
+            escaping = escaping.replace('"', '''"'\\"'"''')
         else:
             # Everything else gets escaped with a single '\'
-            escaping = escaping.replace(ch, "\{}".format(ch));
-    
+            escaping = escaping.replace(ch, "\\{}".format(ch))
+        
     # Calls inputer with the text event and the string to be inputed
     inputer("text", escaping)
 
 def inputer(eventType, adbEscapedInput):
     # executes the adb input command type with the escaped string
-    os.system('adb shell input {} "{}"'.format(eventType, adbEscapedInput));
+    os.system('adb shell input {} "{}"'.format(eventType, adbEscapedInput))
 
 if __name__== "__main__":
     # Tries to call main
@@ -71,5 +71,5 @@ if __name__== "__main__":
         print ('\rExecution interrupted...Exiting!')
         try:
             sys.exit(0)
-        except SystemExit:
-            os._exit(0)
+        except SystemExit as Err:
+            print("Error exiting: {}".format(Err))
