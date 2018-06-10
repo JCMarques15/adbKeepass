@@ -33,21 +33,12 @@ def main():
         else:
             # Escapes the password only and sends the enter key event
             escaper(adbInput)
-            inputer("keyevent", "66")
+            #inputer("keyevent", "66")
 
 def escaper(escaping):
     # For each special character replace with an escaped sequence
-    for ch in ['\\', '`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', ',', '<', '.', '>', '|', '[', '{', ']', '}', ';', ':', "'", '"', '/', '?']:
-        if ch == '\\':
-            # '\' requires two '\' to escape for adb
-            escaping = escaping.replace("\\", "\\\\\\")
-        elif ch == '`':
-            # '`' requires three '\' to escape for adb
-            escaping = escaping.replace("`", "\\\\\\`")
-        elif ch == '$':
-            # '$' requires three '\' to escape for adb
-            escaping = escaping.replace("$", "\\\\\\$")
-        elif ch == '"':
+    for ch in ['\\', '`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', ',', '<', '.', '>', '|', '[', '{', ']', '}', ';', ':', "'", '"', '/', '?', '"<']:
+        if ch == '"':
             # '"' requires escaping and clisong of in "'" for adb to process it as part of the string to send...
             escaping = escaping.replace('"', '''"'\\"'"''')
         else:
